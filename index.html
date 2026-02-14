@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Valentine 🤍</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="page active" id="page1">
+    <h1>Happy Valentine Sayanggg 🤍💐</h1>
+    <button onclick="nextPage()">Masuk 🤍</button>
+</div>
+
+<div class="page" id="page2">
+    <h1>Will you be my Valentine? 🤍</h1>
+    <div class="btn-group">
+        <button id="yesBtn" onclick="nextPage()">YES 🤍</button>
+        <button id="noBtn" onclick="growYes()">NO 😢</button>
+    </div>
+</div>
+
+<div class="page" id="page3">
+    <h1>YEAYYY 🤍🤍🤍</h1>
+    <img src="v.gif" class="biggif">
+    <button onclick="nextPage()">Lanjut 🤍</button>
+</div>
+
+<div class="page" id="page4">
+    <div class="typewriter" id="text1"></div>
+    <button onclick="nextPage()">Lanjut 🤍</button>
+</div>
+
+<div class="page" id="page5">
+    <div class="typewriter" id="text2"></div>
+    <button onclick="nextPage()">Lanjut 🤍</button>
+</div>
+
+<div class="page" id="page6">
+    <img src="uuu.jpg" class="bigphoto">
+    <h2>Lagu ini menggambarkan kamu 🤍</h2>
+    <img src="ww.jpeg" class="album" id="albumArt">
+    <button onclick="playSong()" class="playBtn">Play Lagunya 🎵</button>
+    <audio id="song">
+        <source src="www.mp3" type="audio/mpeg">
+    </audio>
+    <button onclick="nextPage()">Lanjut 🤍</button>
+</div>
+
+<div class="page" id="page7">
+    <h1>Makasihhh udah baca sampai sini 🤍</h1>
+    <h2>Love youuu 🤍🤍🤍</h2>
+
+    <textarea placeholder="Tulis pesan balasan kamu di sini 🤍"></textarea>
+
+    <button class="submitBtn">Kirim 🤍</button>
+</div>
+
+<script>
+
+let currentPage = 1;
+let yesSize = 24;
+let noSize = 24;
+
+function nextPage() {
+    document.getElementById("page"+currentPage).classList.remove("active");
+    currentPage++;
+    document.getElementById("page"+currentPage).classList.add("active");
+
+    if(currentPage === 4) typeText(textPart1, "text1");
+    if(currentPage === 5) typeText(textPart2, "text2");
+}
+
+function growYes(){
+    yesSize += 15;
+    noSize -= 8;
+
+    document.getElementById("yesBtn").style.fontSize = yesSize + "px";
+    document.getElementById("noBtn").style.fontSize = noSize + "px";
+
+    if(noSize <= 5){
+        document.getElementById("noBtn").style.display = "none";
+    }
+}
+
+const textPart1 = `sayanggg… sebenernya aku cuma mau bilang makasih, makasih banget udah hadir di hidup aku sampai sejauh ini 🤍 makasih karena kamu selalu sabar ngadepin aku yang kadang random, kadang capek, kadang nyebelin, tapi kamu masih tetep stay 🤭🤍 aku tau aku bukan yang paling sempurna, aku juga masih belajar jadi orang yang lebih baik, tapi satu hal yang pasti… aku tulus sama kamu.
+
+jujur yaa, tiap hari tuh rasanya beda sejak ada kamu. hal-hal kecil jadi kerasa spesial, ketawa receh jadi lebih rame, capek pun kerasa lebih ringan karena ada kamu buat tempat cerita 🤍`;
+
+const textPart2 = `kalau suatu hari aku diem, bukan berarti aku berubah… mungkin aku cuma lagi capek. kalau suatu hari aku bawel, itu tandanya aku nyaman. dan kalau suatu hari aku kangen, yaa itu karena kamu emang sepenting itu buat aku 🤍
+
+semoga kita bisa terus bareng-bareng yaa, saling jaga, saling ngerti, saling doain 🤍 semoga perasaan ini ga cuma hari ini aja, tapi bisa terus tumbuh pelan-pelan, sederhana tapi dalam.
+
+happy valentine sayanggg 🤍
+lopyu dari bocilll 🤍💐`;
+
+function typeText(text, elementId){
+    let i = 0;
+    let speed = 40; // kecepatan animasi (40ms)
+    let element = document.getElementById(elementId);
+    element.innerHTML = "";
+
+    function typing(){
+        if(i < text.length){
+            element.innerHTML += text.charAt(i);
+            i++;
+            setTimeout(typing, speed);
+        }
+    }
+    typing();
+}
+
+function playSong(){
+    let audio = document.getElementById("song");
+    let album = document.getElementById("albumArt");
+
+    audio.volume = 0;
+    audio.play();
+    album.classList.add("spin");
+
+    let fade = setInterval(()=>{
+        if(audio.volume < 1){
+            audio.volume += 0.05;
+        } else {
+            clearInterval(fade);
+        }
+    },200);
+}
+
+</script>
+
+</body>
+</html>
